@@ -3,21 +3,28 @@ import argparse, os, subprocess
 P = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser(description="Run BULLRUSH with a separately installed Geo3D V2 openMSX.")
 parser.add_argument("--openmsx", default=os.environ.get("BULLRUSH_OPENMSX"))
-parser.add_argument("--rom", type=Path, default=P / "rom/BULLRUSH-CITY-INTERCEPT.ROM")
+parser.add_argument("--external-88h", action="store_true", help="External V9968 cartridge + Geo3D 88h profile")
+parser.add_argument("--rom", type=Path)
 parser.add_argument("--script", type=Path)
 a = parser.parse_args()
 if not a.openmsx:
     parser.error("Specify --openmsx PATH or BULLRUSH_OPENMSX. Standard openMSX is not sufficient.")
 exe = Path(a.openmsx).resolve()
+if a.rom is None:
+    variant = "EXTERNAL-88H" if a.external_88h else "INTERNAL-98H"
+    a.rom = P / "rom" / ("BULLRUSH-CITY-INTERCEPT-" + variant + ".ROM")
 if not exe.is_file() or not a.rom.is_file():
     parser.error("Emulator executable or ROM not found.")
 env = os.environ.copy()
 env["OPENMSX_SYSTEM_DATA"] = str(exe.parent / "share")
 for key, sub in [("OPENMSX_USER_DATA", "userdata"), ("OPENMSX_HOME", "home")]:
-    folder = P / "runtime" / sub
+    folder = P / "runtime" / ("external" if a.external_88h else "internal") / sub
     folder.mkdir(parents=True, exist_ok=True)
     env[key] = str(folder)
-cmd = [str(exe), "-machine", "Panasonic_FS-A1ST_V9968", "-ext", "geo3d", "-cart", str(a.rom.resolve()), "-romtype", "ASCII16"]
+profile = ["-machine", "Panasonic_FS-A1ST", "-ext", "HRA_V9968", "-ext", "geo3d88"] if a.external_88h else ["-machine", "Panasonic_FS-A1ST_V9968", "-ext", "geo3d"]
+cmd = [str(exe), *profile, "-cart", str(a.rom.resolve()), "-romtype", "ASCII16"]
+if a.external_88h:
+    cmd += ["-script", str(P / "tests/external-video.tcl")]
 if a.script:
     cmd += ["-script", str(a.script.resolve())]
 subprocess.run(cmd, cwd=P, env=env, check=True)

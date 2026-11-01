@@ -4,17 +4,38 @@ MSX turboR + V9968 + Geo3D V2.0向けのプレイ可能な市街地追跡ゲー�
 
 盗まれた4機すべてを追跡し、接近して停止させてください。敵は個別にHP100を持ち、発砲してきます。時間制限はなく、自機HPがなくなると敗北です。全4機を破壊しても勝利画面には移らず、残骸を残した街を自由に走れます。自動補充はありません。全滅後に再開したい場合はエミュレータをリセットします。
 
-## 起動・環境
+## ROMの選択・起動
 
-[Releases](https://github.com/kanon-ai/BULLRUSH/releases)からROMを入手し、対応エミュレータでASCII16を指定して読み込んでください。Python3がある場合は下記ランチャーも使えます。**MSX turboR / R800高速 + V9968 + Geo3D V2.0、4MiB ASCII16**。内蔵98h系です。外部88h系・Geo3D V1には対応していません。
+両版とも **4 MiB ASCII16 / MSX turboR・R800 + V9968 + Geo3D V2.0（1024エントリー）専用** です。
 
-開発者版openMSX commit `67811936bee936c15e3fbdbdffe01755fd349876`、`Panasonic_FS-A1ST_V9968` + `geo3d` で検証。通常のopenMSXでは動作しません。Geo3D V2対応版と必要なマシン定義・BIOSを別途用意し、以下で実行します。
+|構成|使用するROM|VDP / Geo3Dポート|
+|---|---|---|
+|外付けV9968カートリッジ|`BULLRUSH-CITY-INTERCEPT-EXTERNAL-88H.ROM`|88h–8Ch / 8Dh・8Fh|
+|内蔵VDP置換構成|`BULLRUSH-CITY-INTERCEPT-INTERNAL-98H.ROM`|98h–9Ch / 9Dh・9Fh|
+
+[Releases](https://github.com/kanon-ai/BULLRUSH/releases)から、自分の構成と一致するROMを選んでください。自動検出・自動切替ではありません。外付け版は外付けV9968側の映像出力を表示します。本体内蔵VDPの出力だけを見てもゲーム画面は表示されません。Geo3D V1、別のポート設定、標準openMSXには対応していません。
+
+**両版とも作者版openMSX commit `67811936bee936c15e3fbdbdffe01755fd349876`で確認。実機・FPGA・BlueMSX+では未検証です。** 現行のあらゆるボード/FPGA構成で動作する保証はありません。BIOS・エミュレータ・FPGAデータは同梱しません。
+
+### 外付け版（88h）
+
+作者版openMSXの `Panasonic_FS-A1ST` + `HRA_V9968` + `geo3d88` を使用します。拡張はこの順で読み込み、映像出力は `V9968` を選びます。ランチャーが出力を切り替えます。
+
+```text
+python run.py --external-88h --openmsx "対応版openmsx.exeのパス"
+```
+
+### 内蔵版（98h）
+
+`Panasonic_FS-A1ST_V9968` + `geo3d` を使用します。
 
 ```text
 python run.py --openmsx "対応版openmsx.exeのパス"
 ```
 
-BIOS・エミュレータ・FPGAデータは同梱しません。正当に用意した環境を使用してください。**実機・FPGA・BlueMSX+では未検証です。**
+Windowsでは `PLAY.cmd` に同じ引数を渡せます。`BULLRUSH_OPENMSX` 環境変数で実行ファイルを指定することもできます。両構成の設定は別のruntimeフォルダに保存します。
+
+両版のSHA256、ポート移植と検証範囲は [docs/IO_VARIANTS.md](docs/IO_VARIANTS.md) を参照してください。
 
 ## 操作
 
@@ -64,7 +85,10 @@ GIF/MP4は実行時の等速で、早送りやフレーム補間はありませ�
 ```text
 python -m pip install -r requirements.txt
 python build.py --rebuild-assets
+python build_io.py
 ```
+
+`build_io.py` は `out/` に両方の名前付きROMを生成します。外付け版は専用コピー内でI/O命令・CのSFR指定・HUD用インラインアセンブリのポートのみを変更して再コンパイルします。元ソースと内蔵版は保持します。
 
 原型デモの素材生成コードも収録し、既存ROMなしで再生成できます。公開用ソースからの再ビルドでも配布ROMとのSHA256一致を確認しています。検証条件は [docs/RELEASE_VALIDATION.md](docs/RELEASE_VALIDATION.md) を参照してください。
 
@@ -103,10 +127,10 @@ python build.py --rebuild-assets
 
 ![Gameplay](media/BULLRUSH-CITY-INTERCEPT-under15MB.gif)
 
-Experimental playable city pursuit game for MSX turboR/R800 + V9968 + Geo3D V2 (internal 98h I/O). Four enemies, melee combat, persistent wrecks, unlimited patrol after clearing all enemies. 4 MiB ASCII16 ROM. Enter starts/retries; arrows or WASD drive; Q/E strafe; Shift boosts; Space punches; C changes camera; T toggles textures; P pauses; M mutes effects. No BGM.
+Experimental playable city pursuit game for MSX turboR/R800 + V9968 + Geo3D V2 (separate internal 98h and external 88h I/O editions). Four enemies, melee combat, persistent wrecks, unlimited patrol after clearing all enemies. 4 MiB ASCII16 ROM. Enter starts/retries; arrows or WASD drive; Q/E strafe; Shift boosts; Space punches; C changes camera; T toggles textures; P pauses; M mutes effects. No BGM.
 
-Tested only with the developer Geo3D V2 openMSX build identified above. Standard openMSX, Geo3D V1 and external 88h configurations are not supported; hardware, FPGA and BlueMSX+ are unverified. Emulator performance is not a hardware benchmark. Original project code: MIT; linked SDCC runtime: GPL with linking exception. AI-generated texture rights are granted only to the extent held. Provided as is, without warranty or endorsement by hardware/emulator developers.
+Tested only with the developer Geo3D V2 openMSX build identified above. Standard openMSX and Geo3D V1 are not supported; hardware, FPGA and BlueMSX+ are unverified. Emulator performance is not a hardware benchmark. Original project code: MIT; linked SDCC runtime: GPL with linking exception. AI-generated texture rights are granted only to the extent held. Provided as is, without warranty or endorsement by hardware/emulator developers.
 
 再ビルドROMの起動確認: `python run.py --openmsx "対応版openmsx.exeのパス" --rom out/BULLRUSH-CITY-INTERCEPT.ROM --script tests/smoke.tcl`（先にビルド）。
 
-Windowsの `PLAY.cmd` も引数が必要です: `PLAY.cmd --openmsx "対応版openmsx.exeのパス"`。または環境変数 `BULLRUSH_OPENMSX` を設定してください。
+外付け版の起動確認には `--external-88h --rom out/BULLRUSH-CITY-INTERCEPT-EXTERNAL-88H.ROM --script tests/io-smoke.tcl` を指定してください。
