@@ -5,3 +5,4 @@ __pycache__/
 assets/baseline-assets.rom
 src/player.asm
 media/*.mp4
+work/

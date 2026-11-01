@@ -88,7 +88,8 @@ def build():
         sparks.poly([(x-4,y,z),(x+4,y+3,z),(x,y+17,z+5)],[0,0,0],8 if i%2 else 5)
     banks[21]=packed(sparks)
     # V2 resident geometry: player poses stream only when changed; all rivals share pose17.
-    geom={};vnext=296;fnext=0
+    geom={};vnext=296;fnext=0;boot_faces={}
+    wheel_face_first=None
     static_bases={1:0,55:148,62:148}
     for bank in [1,55,62,2,*range(8,16),18,19,20,21]:
         src=bytes(banks[bank]);nv,nf,vb,fb=struct.unpack_from('<BBHH',src);vertices=src[6:6+vb]
@@ -99,10 +100,37 @@ def build():
         if bank not in static_bases:vnext+=nv
         facebase=fnext;fnext+=nf;faces=bytearray()
         for j in range(nf):
-            face=src[6+vb+j*11:6+vb+(j+1)*11];ids=[v+base for v in face[:4]];hi=sum((v>>8)<<(2*k) for k,v in enumerate(ids));faces+=bytes([v&255 for v in ids])+bytes([hi])+face[4:]
+            face=src[6+vb+j*11:6+vb+(j+1)*11];ids=[v+base for v in face[:4]];hi=sum((v>>8)<<(2*k) for k,v in enumerate(ids));encoded=bytes([v&255 for v in ids])+bytes([hi])+face[4:]
+            if bank in (1,55,62) and (all(84<=v<92 for v in face[:4]) or all(140<=v<148 for v in face[:4])):
+                side=0 if face[0]<92 else 1
+                boot_faces.setdefault((bank,side),bytearray()).extend(encoded)
+            else: faces+=encoded
         uv=src[6+vb+fb:6+vb+fb+nf*8]
+        if bank in (1,55,62):
+            kept=[j for j in range(nf) if not (all(84<=v<92 for v in src[6+vb+j*11:6+vb+j*11+4]) or all(140<=v<148 for v in src[6+vb+j*11:6+vb+j*11+4]))]
+            uv=b''.join(uv[j*8:j*8+8] for j in kept)
+            nf=len(kept);fnext-=12
+        if bank==2:
+            wheel_face_first=facebase
+            faces+=bytes(6*12);uv+=bytes(6*8);nf+=6;fnext+=6
         blob=bytes([nv,nf])+struct.pack('<HHHH',len(vertices),len(faces),base,facebase)+vertices+faces+uv
         banks[bank]=bytearray(blob+bytes(16384-len(blob)));geom[bank]={'vertices':nv,'faces':nf,'vfirst':base,'ffirst':facebase}
+    for (bank,side),data in boot_faces.items():
+        assert len(data)==72
+        first=(0 if bank==1 else 148)+(84 if side==0 else 140)
+        start=0x1E00+side*128
+        banks[bank][start:start+74]=struct.pack('<H',first)+data
+    # Three resident material batches; both feet share the exact translated
+    # boot shape, so boot face records need not be re-uploaded every frame.
+    wheel_nf=108;wheel_vb=struct.unpack_from('<H',banks[2],2)[0]
+    foot_face_offset=10+wheel_vb+102*12
+    banks[2][foot_face_offset:foot_face_offset+72]=boot_faces[(1,0)]
+    for bank,owner in [(22,55),(23,62)]:
+        banks[bank]=bytearray(banks[2]);struct.pack_into('<H',banks[bank],8,fnext)
+        banks[bank][foot_face_offset:foot_face_offset+72]=boot_faces[(owner,0)]
+        geom[bank]={'vertices':114,'faces':108,'vfirst':296,'ffirst':fnext};fnext+=108
+    banks[3]=bytearray(banks[2])
+    banks[26]=bytearray(banks[2]);banks[26][1]=102
     assert vnext<=1024 and fnext<=1024,(vnext,fnext)
     (O/'resident-models.json').write_text(json.dumps({'vertex_highwater':vnext,'face_highwater':fnext,'models':geom},indent=2))
     # Human-authored district; 4 x 4 junctions, mixed low and high buildings.
@@ -166,6 +194,7 @@ def build():
         assert 0x8000<=a and a+len(b)<=0xC000,(hex(a),len(b))
         banks[63][a-0x8000:a-0x8000+len(b)]=b
     s=(P/'src/renderer.template.asm').read_text().replace('.include "palette.inc"', '.include "'+(P/'src/palette.inc').as_posix()+'"')
+    s=s.replace('WHEEL_FACE_FIRST',str(wheel_face_first)).replace('BOOT_FACE_FIRST',str(wheel_face_first+102))
     for k,v in symbols.items():s=s.replace(k[1:].upper(),str(v))
     (P/'src/player.asm').write_text(s)
     run([TOOL/'sdasz80.exe','-los',O/'player.rel',P/'src/player.asm'])

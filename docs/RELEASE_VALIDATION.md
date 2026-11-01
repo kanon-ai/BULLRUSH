@@ -1,3 +1,5 @@
+> Historical v0.2.0/v0.2.1 validation. For v0.2.2 see [ROLLER_FIX.md](ROLLER_FIX.md) and [roller-validation.json](roller-validation.json).
+
 # Public build validation — 2026-11-01
 
 - Rebuilt from the sanitized public sources and original material atlas, without a baseline ROM; `python build.py --rebuild-assets` completed.

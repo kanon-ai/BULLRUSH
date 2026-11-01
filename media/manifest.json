@@ -1,8 +1,8 @@
 {
-  "mp4_seconds": 94.81,
-  "gif_excerpt_start_seconds": 59.81,
+  "mp4_seconds": 90.4,
+  "gif_excerpt_start_seconds": 55.400000000000006,
   "gif_seconds": 35.00000000000003,
-  "gif_bytes": 12175797,
+  "gif_bytes": 12259029,
   "playback_speed_modified": false,
   "frame_interpolation": false,
   "source": "Key-input-only emulator play test; hardware unverified"

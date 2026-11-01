@@ -1,0 +1,93 @@
+{
+  "internal_sha256": "b5938c2d3676734ef8d75b687fee2db14667f28b93a37675d747b8a5f4cb863c",
+  "fixed_scene_rates": [
+    {
+      "case": 0,
+      "v021_updates_per_second": 12.0,
+      "v022_updates_per_second": 12.0
+    },
+    {
+      "case": 1,
+      "v021_updates_per_second": 12.0,
+      "v022_updates_per_second": 11.5
+    },
+    {
+      "case": 2,
+      "v021_updates_per_second": 15.0,
+      "v022_updates_per_second": 12.0
+    },
+    {
+      "case": 3,
+      "v021_updates_per_second": 12.0,
+      "v022_updates_per_second": 12.0
+    },
+    {
+      "case": 4,
+      "v021_updates_per_second": 12.0,
+      "v022_updates_per_second": 12.0
+    },
+    {
+      "case": 5,
+      "v021_updates_per_second": 12.0,
+      "v022_updates_per_second": 12.0
+    }
+  ],
+  "normal_key_test": {
+    "all_four_destroyed": true,
+    "first_clear_emulated_seconds": 97.40295875593127,
+    "free_patrol_to_seconds": 180.00596374678904,
+    "wreck_positions_stable": true
+  },
+  "hardware_tested": false,
+  "bluemsx_tested": false,
+  "notes": [
+    "Fixed scenes use RAM setup, not ordinary play.",
+    "Two-second measurements are quantized by completed frames.",
+    "Case2 decreases from15 to12 updates/s; most cases remain approximately12.",
+    "Timed key tests share input schedule, not identical world states, because simulation integrates elapsed time. Do not infer universal speedup.",
+    "Shared boot transforms are used only where original integer-rounded vertices match the translation; exceptional player poses use original right boot faces/vertices."
+  ],
+  "external_sha256": "4a4ec0f07b1b49fe4ab0c8e674fcea1fc8c29e5c690b2fe5b0ac7a1174b56ca2",
+  "source_only_rebuild_matches": true,
+  "original_vertices_poses_rotation_tables_preserved": true,
+  "internal_defeat_retry": true,
+  "internal_controls": {
+    "state": [
+      "0",
+      "1",
+      "4"
+    ],
+    "view": [
+      "0",
+      "1"
+    ],
+    "texture": [
+      "0",
+      "1"
+    ]
+  },
+  "external_controls": {
+    "state": [
+      "0",
+      "1",
+      "4"
+    ],
+    "view": [
+      "0",
+      "1"
+    ],
+    "texture": [
+      "0",
+      "1"
+    ]
+  },
+  "external_key_test": {
+    "all_four_destroyed": true,
+    "free_patrol_to_seconds": 180.003878844937,
+    "wreck_positions_stable": true
+  },
+  "same_timed_key_input_rates": {
+    "old": 12.44,
+    "new": 12.84
+  }
+}

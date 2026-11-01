@@ -180,6 +180,21 @@ main:
  call load15
  ; Game draws an opaque sky/ground backing in the hidden page.
  call GAME_BACKDROP
+ call prepare_foot_records
+ ; Upload changed protagonist pose before either foot can be drawn.
+ ld a,(VIEW)
+ or a
+ jr nz,body_pose_ready
+ ld a,(0xE44B)
+ ld b,a
+ ld a,(0xE446)
+ cp b
+ jr z,body_pose_ready
+ ld a,#1
+ ld (MODEL),a
+ ld (0x6000),a
+ call load_geometry
+body_pose_ready:
  ld a,#0x46
  out (0x9D),a
  xor a
@@ -211,6 +226,11 @@ object_loop:
  ld bc,#0x189F
  otir
  ld (PTR),hl
+ ld a,(MODEL)
+ cp #2
+ jp z,grouped_foot
+ cp #3
+ jp z,grouped_foot
  ld a,#0x48
  out (0x9D),a
  ld a,(TEX)
@@ -267,13 +287,7 @@ load_geometry:
  cp #1
  jr nz,select_resident
  ; Only the protagonist uses changing poses. Static rivals have their own slot.
- ld a,(COUNT)
- ld e,a
- ld d,#0
- ld hl,#REC+1700
- or a
- sbc hl,de
- ld a,(hl)
+ ld a,(0xE44B)
  ld b,a
  ld a,(0xE446)
  cp b
@@ -324,6 +338,30 @@ body_vertex_loop:
  ld a,#1
  ld (0x6000),a
 select_resident:
+ ld a,(MODEL)
+ cp #2
+ jr z,foot_material
+ cp #3
+ jr nz,resident_material_ready
+foot_material:
+ ld a,(COUNT)
+ ld e,a
+ ld d,#0
+ ld hl,#REC+1700
+ or a
+ sbc hl,de
+ ld a,(hl)
+ cp #55
+ ld a,#22
+ jr z,foot_material_ready
+ ld a,(hl)
+ cp #62
+ ld a,#23
+ jr z,foot_material_ready
+ ld a,#2
+foot_material_ready:
+ ld (0x6000),a
+resident_material_ready:
  ld a,#0x54
  out (0x9D),a
  ld hl,#0x4006
@@ -717,8 +755,273 @@ cache_model_next:
  call geoblock
  pop hl
  jr cache_model_next
+
+; Keep the roller projection and depth-sort it together with its own boot.
+; No simplification, per-side scaling, or fixed front/back mask.
+
+prepare_foot_records:
+ ld a,(0xC500)
+ ld b,a
+ ld e,a
+ ld d,#0
+ ld hl,#REC+1600
+ or a
+ sbc hl,de
+ push hl
+ pop ix
+ ld hl,#REC+1700
+ or a
+ sbc hl,de
+ push hl
+ pop iy
+ ld de,#REC+2048
+foot_record_loop:
+ ld a,0(ix)
+ cp #2
+ jr z,copy_foot_record
+ cp #3
+ jr nz,foot_record_next
+copy_foot_record:
+ push bc
+ push de
+ ld a,0(iy)
+ and #0x7F
+ add a,#0x20
+ ld l,a
+ ld h,#0xC5
+ ld a,(hl)
+ ld l,a
+ ld h,#0
+ add hl,hl
+ add hl,hl
+ add hl,hl
+ ld b,h
+ ld c,l
+ add hl,hl
+ add hl,bc
+ ld bc,#REC
+ add hl,bc
+ ld bc,#24
+ ldir
+ push af
+ ld a,0(ix)
+ cp #3
+ call z,shift_right_boot
+ pop af
+ ; A retains the owner's sorted record index through LDIR.
+ ld e,a
+ ld d,#0
+ ld hl,#REC+1600
+ add hl,de
+ ld a,(0xC500)
+ ld e,a
+ or a
+ sbc hl,de
+ ld a,(hl)
+ bit 7,0(iy)
+ jr z,foot_owner_ready
+ or #0x80
+foot_owner_ready:
+ ld 0(iy),a
+ pop de
+ pop bc
+foot_record_next:
+ ex de,hl
+ ld de,#24
+ add hl,de
+ ex de,hl
+ inc ix
+ inc iy
+ djnz foot_record_loop
+ ret
+
+
+; Right boot = identical left boot plus the exact foot-center displacement.
+; Source records are already in camera space; no extra matrix multiplication.
+shift_right_boot:
+ bit 7,0(iy)
+ ret nz
+ push ix
+ push iy
+ push de
+ ld a,0(iy)
+ inc a
+ add a,#0x20
+ ld l,a
+ ld h,#0xC5
+ ld l,(hl)
+ ld h,#0
+ add hl,hl
+ add hl,hl
+ add hl,hl
+ ld b,h
+ ld c,l
+ add hl,hl
+ add hl,bc
+ ld bc,#REC
+ add hl,bc
+ push hl
+ pop iy
+ ; DE is one past this destination boot record.
+ ex de,hl
+ ld bc,#24
+ or a
+ sbc hl,bc
+ push hl
+ pop ix
+ ld bc,#2048
+ or a
+ sbc hl,bc
+ ex de,hl
+ push de
+ ld hl,#18
+ add hl,de
+ ld e,(hl)
+ inc hl
+ ld d,(hl)
+ ld l,18(iy)
+ ld h,19(iy)
+ ex de,hl
+ or a
+ sbc hl,de
+ ld e,18(ix)
+ ld d,19(ix)
+ add hl,de
+ ld 18(ix),l
+ ld 19(ix),h
+ pop de
+ push de
+ ld hl,#20
+ add hl,de
+ ld e,(hl)
+ inc hl
+ ld d,(hl)
+ ld l,20(iy)
+ ld h,21(iy)
+ ex de,hl
+ or a
+ sbc hl,de
+ ld e,20(ix)
+ ld d,21(ix)
+ add hl,de
+ ld 20(ix),l
+ ld 21(ix),h
+ pop de
+ push de
+ ld hl,#22
+ add hl,de
+ ld e,(hl)
+ inc hl
+ ld d,(hl)
+ ld l,22(iy)
+ ld h,23(iy)
+ ex de,hl
+ or a
+ sbc hl,de
+ ld e,22(ix)
+ ld d,23(ix)
+ add hl,de
+ ld 22(ix),l
+ ld 23(ix),h
+ pop de
+ pop de
+ pop iy
+ pop ix
+ ret
+
+grouped_foot:
+ ld a,#0x59
+ out (0x9D),a
+ xor a
+ out (0x9F),a
+ ld a,#0x48
+ out (0x9D),a
+ ld a,#3
+ out (0x9F),a
+foot_project_wait:
+ in a,(0x9D)
+ and #1
+ jr nz,foot_project_wait
+ ; Project the boot with its owner body's matrix, preserving wheel rotation.
+ ld hl,(PTR)
+ ld de,#2024
+ add hl,de
+ xor a
+ out (0x9D),a
+ ld bc,#0x189F
+ otir
+ ld a,(COUNT)
+ ld e,a
+ ld d,#0
+ ld hl,#REC+1700
+ or a
+ sbc hl,de
+ ld a,(hl)
+ ld (0xE44C),a
+ and #0x7F
+ ld (0x6000),a
+ ld hl,#0x5E00
+ ld a,(0xE44C)
+ bit 7,a
+ jr z,foot_vertex_ready
+ ld l,#0x80
+ push hl
+ inc hl
+ inc hl
+ call patch_exact_boot_faces
+ pop hl
+foot_vertex_ready:
+ ld a,#0x54
+ out (0x9D),a
+ ld b,#2
+ ld c,#0x9F
+ otir
+ ld a,#0x42
+ out (0x9D),a
+ ld a,#8
+ out (0x9F),a
+ xor a
+ out (0x9F),a
+ ld a,#0x59
+ out (0x9D),a
+ ld a,#108
+ out (0x9F),a
+ ld a,#0x48
+ out (0x9D),a
+ ld a,#3
+ out (0x9F),a
+foot_render_wait:
+ call sample_action_keys
+ in a,(0x9D)
+ and #1
+ jr nz,foot_render_wait
+ ld a,(0xE44C)
+ bit 7,a
+ jp z,next_object
+ ld hl,#0x5E02
+ call patch_exact_boot_faces
+ jp next_object
+
+
+patch_exact_boot_faces:
+ push hl
+ ld a,#0x6C
+ out (0x9D),a
+ ld a,#(BOOT_FACE_FIRST / 256)
+ out (0x9F),a
+ ld a,#0x58
+ out (0x9D),a
+ ld a,#(BOOT_FACE_FIRST % 256)
+ out (0x9F),a
+ ld a,#0x52
+ out (0x9D),a
+ pop hl
+ ld bc,#0x489F
+ otir
+ ret
+
 resident_models:
- .db 1,55,62,2,8,9,10,11,12,13,14,15,18,19,20,21,255
+ .db 1,55,62,2,22,23,8,9,10,11,12,13,14,15,18,19,20,21,255
 
 .org 0x5000
 .include "palette.inc"

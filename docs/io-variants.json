@@ -1,8 +1,8 @@
 {
   "bytes": 4194304,
-  "internal_sha256": "48cdd7f8c236da36005922bc8000981fa6e9e6a4e6a04919a61318df10fa5443",
-  "external_sha256": "a6f54f246f2400d22a1850ad85a7c18fd6292f4f98ec7b2d312e256d24914ad0",
-  "changed_operand_count": 85,
+  "internal_sha256": "b5938c2d3676734ef8d75b687fee2db14667f28b93a37675d747b8a5f4cb863c",
+  "external_sha256": "4a4ec0f07b1b49fe4ab0c8e674fcea1fc8c29e5c690b2fe5b0ac7a1174b56ca2",
+  "changed_operand_count": 108,
   "rom_offsets": [
     354,
     382,
@@ -18,73 +18,96 @@
     481,
     485,
     490,
-    543,
-    546,
-    551,
-    598,
-    603,
-    613,
-    622,
-    627,
-    750,
-    753,
-    757,
-    760,
-    764,
-    778,
-    782,
+    573,
+    576,
+    581,
+    628,
+    633,
+    656,
+    665,
+    670,
+    783,
     786,
-    789,
-    795,
-    799,
-    810,
+    790,
+    793,
+    797,
+    811,
     815,
+    819,
     822,
-    827,
-    830,
-    834,
-    837,
-    841,
-    846,
-    913,
-    918,
-    925,
-    934,
-    936,
-    1254,
-    1259,
-    1269,
-    1317,
-    1411,
-    1415,
-    1554,
-    1557,
-    1560,
-    1565,
-    1567,
-    1575,
-    1577,
-    1586,
-    1590,
-    1593,
-    1597,
-    1601,
-    1605,
-    1626,
-    1631,
+    828,
+    832,
+    885,
+    890,
+    897,
+    902,
+    905,
+    909,
+    912,
+    916,
+    921,
+    988,
+    993,
+    1000,
+    1009,
+    1011,
+    1329,
+    1334,
+    1344,
+    1392,
+    1486,
+    1490,
+    1629,
+    1632,
     1635,
     1640,
-    1644,
-    1658,
-    1663,
-    1667,
+    1642,
+    1650,
+    1652,
+    1661,
+    1665,
+    1668,
     1672,
     1676,
-    1687,
-    1692,
-    1696,
+    1680,
     1701,
-    1717,
+    1706,
+    1710,
+    1715,
+    1719,
+    1733,
+    1738,
+    1742,
+    1747,
+    1751,
+    1762,
+    1767,
+    1771,
+    1776,
+    1792,
+    2079,
+    2082,
+    2086,
+    2090,
+    2092,
+    2106,
+    2108,
+    2155,
+    2159,
+    2165,
+    2169,
+    2172,
+    2176,
+    2180,
+    2184,
+    2188,
+    2193,
+    2219,
+    2223,
+    2227,
+    2231,
+    2235,
+    2238,
     1033805,
     1033810,
     1033837,
@@ -162,74 +185,59 @@
       "after": "ld bc,#0x0C8F"
     },
     {
-      "line": 184,
+      "line": 199,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 186,
+      "line": 201,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 188,
+      "line": 203,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 209,
+      "line": 224,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 211,
+      "line": 226,
       "before": "ld bc,#0x189F",
       "after": "ld bc,#0x188F"
     },
     {
-      "line": 215,
+      "line": 235,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 220,
+      "line": 240,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 223,
+      "line": 243,
       "before": "in a,(0x9D)",
       "after": "in a,(0x8D)"
     },
     {
-      "line": 290,
+      "line": 304,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 292,
+      "line": 306,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 294,
+      "line": 308,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
-    },
-    {
-      "line": 296,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 298,
-      "before": "out (0x9D),a",
-      "after": "out (0x8D),a"
-    },
-    {
-      "line": 307,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
     },
     {
       "line": 310,
@@ -237,257 +245,212 @@
       "after": "out (0x8F),a"
     },
     {
-      "line": 313,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 315,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 319,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 322,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 328,
+      "line": 312,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 330,
+      "line": 321,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 324,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 327,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 329,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 333,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 336,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 366,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 368,
       "before": "ld bc,#0x049F",
       "after": "ld bc,#0x048F"
     },
     {
-      "line": 333,
+      "line": 371,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 335,
+      "line": 373,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 337,
+      "line": 375,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 339,
+      "line": 377,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 341,
+      "line": 379,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 343,
+      "line": 381,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
-    },
-    {
-      "line": 345,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
     },
     {
       "line": 383,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 421,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 385,
+      "line": 423,
       "before": "ld bc,#0x189F",
       "after": "ld bc,#0x188F"
     },
     {
-      "line": 388,
+      "line": 426,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 393,
+      "line": 431,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 395,
+      "line": 433,
       "before": "in a,(0x9D)",
       "after": "in a,(0x8D)"
     },
     {
-      "line": 495,
+      "line": 533,
       "before": "out (0x99),a",
       "after": "out (0x89),a"
     },
     {
-      "line": 498,
+      "line": 536,
       "before": "out (0x99),a",
       "after": "out (0x89),a"
     },
     {
-      "line": 504,
+      "line": 542,
       "before": "in a,(0x99)",
       "after": "in a,(0x89)"
     },
     {
-      "line": 531,
+      "line": 569,
       "before": "ld bc,#0x0F9B",
       "after": "ld bc,#0x0F8B"
     },
     {
-      "line": 589,
+      "line": 627,
       "before": "ld c,#0x9F",
       "after": "ld c,#0x8F"
     },
     {
-      "line": 592,
+      "line": 630,
       "before": "ld c,#0x98",
       "after": "ld c,#0x88"
     },
     {
-      "line": 629,
+      "line": 667,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 631,
+      "line": 669,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 633,
+      "line": 671,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
     {
-      "line": 637,
-      "before": "out (0x9D),a",
-      "after": "out (0x8D),a"
-    },
-    {
-      "line": 638,
-      "before": "in a,(0x9F)",
-      "after": "in a,(0x8F)"
-    },
-    {
-      "line": 642,
-      "before": "out (0x9D),a",
-      "after": "out (0x8D),a"
-    },
-    {
-      "line": 643,
-      "before": "in a,(0x9F)",
-      "after": "in a,(0x8F)"
-    },
-    {
-      "line": 650,
-      "before": "out (0x99),a",
-      "after": "out (0x89),a"
-    },
-    {
-      "line": 652,
-      "before": "out (0x99),a",
-      "after": "out (0x89),a"
-    },
-    {
-      "line": 654,
-      "before": "out (0x99),a",
-      "after": "out (0x89),a"
-    },
-    {
-      "line": 656,
-      "before": "out (0x99),a",
-      "after": "out (0x89),a"
-    },
-    {
-      "line": 658,
-      "before": "out (0x99),a",
-      "after": "out (0x89),a"
-    },
-    {
-      "line": 660,
-      "before": "out (0x99),a",
-      "after": "out (0x89),a"
-    },
-    {
-      "line": 674,
+      "line": 675,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
       "line": 676,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 678,
-      "before": "out (0x9D),a",
-      "after": "out (0x8D),a"
+      "before": "in a,(0x9F)",
+      "after": "in a,(0x8F)"
     },
     {
       "line": 680,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 682,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 687,
+      "line": 681,
+      "before": "in a,(0x9F)",
+      "after": "in a,(0x8F)"
+    },
+    {
+      "line": 688,
+      "before": "out (0x99),a",
+      "after": "out (0x89),a"
+    },
+    {
+      "line": 690,
+      "before": "out (0x99),a",
+      "after": "out (0x89),a"
+    },
+    {
+      "line": 692,
+      "before": "out (0x99),a",
+      "after": "out (0x89),a"
+    },
+    {
+      "line": 694,
+      "before": "out (0x99),a",
+      "after": "out (0x89),a"
+    },
+    {
+      "line": 696,
+      "before": "out (0x99),a",
+      "after": "out (0x89),a"
+    },
+    {
+      "line": 698,
+      "before": "out (0x99),a",
+      "after": "out (0x89),a"
+    },
+    {
+      "line": 712,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
     },
     {
-      "line": 689,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 691,
-      "before": "out (0x9D),a",
-      "after": "out (0x8D),a"
-    },
-    {
-      "line": 693,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 695,
-      "before": "out (0x9D),a",
-      "after": "out (0x8D),a"
-    },
-    {
-      "line": 699,
-      "before": "out (0x9D),a",
-      "after": "out (0x8D),a"
-    },
-    {
-      "line": 701,
-      "before": "out (0x9F),a",
-      "after": "out (0x8F),a"
-    },
-    {
-      "line": 703,
-      "before": "out (0x9D),a",
-      "after": "out (0x8D),a"
-    },
-    {
-      "line": 705,
+      "line": 714,
       "before": "out (0x9F),a",
       "after": "out (0x8F),a"
     },
@@ -495,6 +458,181 @@
       "line": 716,
       "before": "out (0x9D),a",
       "after": "out (0x8D),a"
+    },
+    {
+      "line": 718,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 720,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 725,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 727,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 729,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 731,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 733,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 737,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 739,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 741,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 743,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 754,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 934,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 936,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 938,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 940,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 942,
+      "before": "in a,(0x9D)",
+      "after": "in a,(0x8D)"
+    },
+    {
+      "line": 950,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 951,
+      "before": "ld bc,#0x189F",
+      "after": "ld bc,#0x188F"
+    },
+    {
+      "line": 975,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 977,
+      "before": "ld c,#0x9F",
+      "after": "ld c,#0x8F"
+    },
+    {
+      "line": 980,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 982,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 984,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 986,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 988,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 990,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 992,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 995,
+      "before": "in a,(0x9D)",
+      "after": "in a,(0x8D)"
+    },
+    {
+      "line": 1009,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 1011,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 1013,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 1015,
+      "before": "out (0x9F),a",
+      "after": "out (0x8F),a"
+    },
+    {
+      "line": 1017,
+      "before": "out (0x9D),a",
+      "after": "out (0x8D),a"
+    },
+    {
+      "line": 1019,
+      "before": "ld bc,#0x489F",
+      "after": "ld bc,#0x488F"
     }
   ],
   "c_inline_changes": [

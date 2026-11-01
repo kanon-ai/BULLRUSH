@@ -278,6 +278,7 @@ void fast_sort(u8 first) __naked {
  ret
  __endasm;
 }
+static const u8 boot_exact[24]={0,0,0,0,0,1,1,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,1,1};
 void scene(void){u8 i,j,k,n,pose,epose; i16 dx,dz,z,x,y,dc,ds,near[12];u8 idx[12];i16 *rec=(i16*)0xC000;u8 *banks=(u8*)0xC000+1600,*poses=(u8*)0xC000+1700;
  count=0;
  {i16 d=(i8)(angle-camangle);camangle+=(i8)(d>8?8:d< -8?-8:d);}
@@ -302,13 +303,13 @@ void scene(void){u8 i,j,k,n,pose,epose; i16 dx,dz,z,x,y,dc,ds,near[12];u8 idx[12
  {i16 target=(turn+slide)*64;if(target>64)target=64;if(target< -64)target=-64;
  if(lean<target){lean+=16;if(lean>target)lean=target;}if(lean>target){lean-=16;if(lean<target)lean=target;}}
  pose=(ab(speed)<120?0:ab(speed)<350?1:ab(speed)<600?2:3)*5+(u8)((lean+64)/32);
- if(attack)pose=20+((8-attack)/2);epose=17;
- if(!VIEW){add(1,px,0,pz,angle,pose,0);for(i=0;i<2;i++){x=feet[pose][i*3];y=feet[pose][i*3+1];z=feet[pose][i*3+2];add(2,px+mul(x,sintab[(u8)(angle+64)])+mul(z,sintab[angle]),y,pz-mul(x,sintab[angle])+mul(z,sintab[(u8)(angle+64)]),angle,roll,0);}}
+ if(attack)pose=20+((8-attack)/2);epose=17;MEM(0xE44B)=pose;
+ if(!VIEW){add(1,px,0,pz,angle,pose,0);for(i=0;i<2;i++){x=feet[pose][i*3];y=feet[pose][i*3+1];z=feet[pose][i*3+2];add(2+i,px+mul(x,sintab[(u8)(angle+64)])+mul(z,sintab[angle]),y,pz-mul(x,sintab[angle])+mul(z,sintab[(u8)(angle+64)]),angle,roll,0);}}
  for(j=0;j<4;j++){i16 wx,wz;u8 ea=j?patrol[j-1].angle:eangle,er=j?patrol[j-1].roll:eroll; i16 eh=j?0:ey;
   wx=enemyx(j);wz=enemyz(j);if(ab(wx-px)+ab(wz-pz)>=2400)continue;
   if(!enemyhp[j])eh=sparks[j]>1000?(sparks[j]-1000)/30:0;
   add(enemyhp[j]?(j==1?62:55):(j==1?20:19),wx,eh,wz,ea,17,0);
-  for(i=0;i<2;i++){volatile i16 fx,fz;if(enemyhp[j]){x=feet[17][i*3];y=feet[17][i*3+1];z=feet[17][i*3+2];}else{x=i?42:-42;y=14;z=-55;er=0;}fx=wx+mul(x,sintab[(u8)(ea+64)])+mul(z,sintab[ea]);fz=wz-mul(x,sintab[ea])+mul(z,sintab[(u8)(ea+64)]);add(2,fx,eh+y,fz,ea,er,0);}
+  for(i=0;i<2;i++){volatile i16 fx,fz;if(enemyhp[j]){x=feet[17][i*3];y=feet[17][i*3+1];z=feet[17][i*3+2];}else{x=i?42:-42;y=14;z=-55;er=0;}fx=wx+mul(x,sintab[(u8)(ea+64)])+mul(z,sintab[ea]);fz=wz-mul(x,sintab[ea])+mul(z,sintab[(u8)(ea+64)]);add(enemyhp[j]?2+i:26,fx,eh+y,fz,ea,er,0);}
   if(sparks[j])add(21,wx,80+(2200-sparks[j])/24,wz,tick*11,0,0);
   if(shotpending[j]){i16 t=(i32)fireclock[j]*256/1500;add(18,wx+mul(shotx[j]-wx,t),90,wz+mul(shotz[j]-wz,t),ea,0,0);}
  }
@@ -317,12 +318,19 @@ void scene(void){u8 i,j,k,n,pose,epose; i16 dx,dz,z,x,y,dc,ds,near[12];u8 idx[12
  MEM(0xC500)=count;
  for(i=0;i<count;i++){u8 index=order[i];Obj *o=&objects[index];u8 a=o->angle-camangle,view=VIEW?1:0;
   MEM(0xE447)|=keys(8)&1;
-  if(o->bank==2&&view<2){MEM(0x6000)=64+view*86+a/3;memcpy(rec,(const void*)(0x4000+(u16)(a%3)*4608+(u16)o->pose*18),18);}
+  if((o->bank==2||o->bank==3||o->bank==26)&&view<2){MEM(0x6000)=64+view*86+a/3;memcpy(rec,(const void*)(0x4000+(u16)(a%3)*4608+(u16)o->pose*18),18);}
   else{MEM(0x6000)=60;memcpy(rec,(const void*)(0x4000+(u16)view*4608+(u16)a*18),18);
-   if(o->bank==2){u8 r;for(r=0;r<3;r++){i16 aa=rec[r*3+1],bb=rec[r*3+2];rec[r*3+1]=mul(aa,sintab[(u8)(o->pose+64)])+mul(bb,sintab[o->pose]);rec[r*3+2]=-mul(aa,sintab[o->pose])+mul(bb,sintab[(u8)(o->pose+64)]);}}}
+   if((o->bank==2||o->bank==3||o->bank==26)){u8 r;for(r=0;r<3;r++){i16 aa=rec[r*3+1],bb=rec[r*3+2];rec[r*3+1]=mul(aa,sintab[(u8)(o->pose+64)])+mul(bb,sintab[o->pose]);rec[r*3+2]=-mul(aa,sintab[o->pose])+mul(bb,sintab[(u8)(o->pose+64)]);}}}
   y=o->y-cy;z=projection_z[index];rec[9]=projection_x[index];rec[10]=mul(y,cpitch)+mul(z,pitch);rec[11]=mul(z,cpitch)-mul(y,pitch);
-  banks[-(i16)(count-i)]=o->bank;poses[-(i16)(count-i)]=o->pose;rec+=12;
+  banks[-(i16)(count-i)]=o->bank;poses[-(i16)(count-i)]=o->pose;
+  MEM(0xC520+index)=i;
+  if(o->bank==2||o->bank==3){
+   u8 owner=index-(o->bank==2?1:2);poses[-(i16)(count-i)]=owner;
+   if(o->bank==3&&objects[owner].bank==1&&boot_exact[pose])poses[-(i16)(count-i)]|=128;
+  }
+  rec+=12;
  }
+
 }
 void game_tick(void){u8 enter;dt=timerlo;dt|=(u16)timerhi<<8;timerlo=0;dt>>=6;if(dt<10)dt=260;tick++;
  key2=keys(2);key3=keys(3)|MEM(0xE448);key4=keys(4)|MEM(0xE449);MEM(0xE448)=MEM(0xE449)=0;key5=keys(5);key6=keys(6);key7=keys(7)|MEM(0xE44A);key8=keys(8)|MEM(0xE447);MEM(0xE44A)=MEM(0xE447)=0;enter=(key7&128)!=0;
