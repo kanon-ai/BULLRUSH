@@ -1,0 +1,7 @@
+out/
+runtime/
+__pycache__/
+.venv/
+assets/baseline-assets.rom
+src/player.asm
+media/*.mp4

@@ -1,0 +1,38 @@
+{
+  "rom_sha256": "48cdd7f8c236da36005922bc8000981fa6e9e6a4e6a04919a61318df10fa5443",
+  "nearest_selection_samples": 186,
+  "mismatches": 0,
+  "diagnostic_pixels": "self5,selected7,other_live12,wreck4",
+  "colors_rgb": {
+    "3": [
+      82,
+      90,
+      99
+    ],
+    "4": [
+      148,
+      148,
+      148
+    ],
+    "5": [
+      230,
+      222,
+      197
+    ],
+    "7": [
+      222,
+      132,
+      33
+    ],
+    "11": [
+      49,
+      82,
+      107
+    ],
+    "12": [
+      90,
+      132,
+      148
+    ]
+  }
+}

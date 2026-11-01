@@ -1,0 +1,13 @@
+{
+  "rom_sha256": "48cdd7f8c236da36005922bc8000981fa6e9e6a4e6a04919a61318df10fa5443",
+  "milliseconds_mean": {
+    "cpu": 37.85581158529396,
+    "backdrop": 5.966108179308442,
+    "geometry": 14.968739609930186,
+    "hud": 10.506578425545708,
+    "vblank": 10.873485808044471,
+    "geo_wait": 11.441906987045934,
+    "vdp_wait": 6.56160889842887
+  },
+  "note": "Frozen states; Geo wait included in geometry; VDP wait nested in backdrop/HUD. Initial stale-address profile discarded and setup regenerated from final map."
+}

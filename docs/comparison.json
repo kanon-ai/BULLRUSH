@@ -1,0 +1,393 @@
+{
+  "baseline": {
+    "fixed_views": [
+      {
+        "view": 0,
+        "fps": 11.985,
+        "objects_min": 28,
+        "objects_max": 34
+      },
+      {
+        "view": 1,
+        "fps": 11.985,
+        "objects_min": 34,
+        "objects_max": 39
+      },
+      {
+        "view": 2,
+        "fps": 11.984,
+        "objects_min": 38,
+        "objects_max": 39
+      },
+      {
+        "view": 3,
+        "fps": 11.985,
+        "objects_min": 36,
+        "objects_max": 38
+      },
+      {
+        "view": 4,
+        "fps": 11.985,
+        "objects_min": 31,
+        "objects_max": 36
+      },
+      {
+        "view": 5,
+        "fps": 11.984,
+        "objects_min": 31,
+        "objects_max": 39
+      }
+    ],
+    "same_keys_fps": 13.232151423922538,
+    "20ms_taps": 20,
+    "detected": 20,
+    "observed_response_ms": [
+      165.81,
+      146.35,
+      126.9,
+      107.44,
+      20.0,
+      151.96,
+      132.51,
+      113.05,
+      20.0,
+      157.58,
+      138.11,
+      135.35,
+      149.27,
+      129.81,
+      110.37,
+      20.0,
+      154.9,
+      135.43,
+      115.98,
+      20.0
+    ]
+  },
+  "added": {
+    "fixed_views": [
+      {
+        "view": 0,
+        "fps": 11.985,
+        "objects_min": 28,
+        "objects_max": 34
+      },
+      {
+        "view": 1,
+        "fps": 11.985,
+        "objects_min": 34,
+        "objects_max": 39
+      },
+      {
+        "view": 2,
+        "fps": 11.984,
+        "objects_min": 38,
+        "objects_max": 39
+      },
+      {
+        "view": 3,
+        "fps": 11.985,
+        "objects_min": 36,
+        "objects_max": 38
+      },
+      {
+        "view": 4,
+        "fps": 11.984,
+        "objects_min": 31,
+        "objects_max": 36
+      },
+      {
+        "view": 5,
+        "fps": 11.985,
+        "objects_min": 31,
+        "objects_max": 39
+      }
+    ],
+    "same_keys_fps": 12.009826918815266,
+    "20ms_taps": 20,
+    "detected": 20,
+    "observed_response_ms": [
+      165.8,
+      146.35,
+      126.89,
+      107.45,
+      20.0,
+      151.97,
+      132.52,
+      113.05,
+      20.0,
+      157.59,
+      138.12,
+      118.66,
+      99.21,
+      163.2,
+      143.76,
+      157.68,
+      138.22,
+      118.76,
+      99.31,
+      163.29
+    ]
+  },
+  "current": {
+    "fixed_views": [
+      {
+        "view": 0,
+        "fps": 11.984,
+        "objects_min": 28,
+        "objects_max": 34
+      },
+      {
+        "view": 1,
+        "fps": 11.985,
+        "objects_min": 34,
+        "objects_max": 39
+      },
+      {
+        "view": 2,
+        "fps": 11.985,
+        "objects_min": 38,
+        "objects_max": 39
+      },
+      {
+        "view": 3,
+        "fps": 11.985,
+        "objects_min": 36,
+        "objects_max": 38
+      },
+      {
+        "view": 4,
+        "fps": 11.985,
+        "objects_min": 31,
+        "objects_max": 36
+      },
+      {
+        "view": 5,
+        "fps": 14.981,
+        "objects_min": 31,
+        "objects_max": 39
+      }
+    ],
+    "same_keys_fps": 12.423764702508512,
+    "20ms_taps": 20,
+    "detected": 20,
+    "observed_response_ms": [
+      115.74,
+      20.0,
+      20.0,
+      140.82,
+      121.36,
+      101.9,
+      149.19,
+      129.74,
+      20.0,
+      157.58,
+      138.13,
+      118.66,
+      132.59,
+      146.52,
+      127.07,
+      107.6,
+      20.0,
+      152.13,
+      166.04,
+      146.58
+    ]
+  },
+  "added-stress": {
+    "fixed_views": [
+      {
+        "view": 0,
+        "fps": 11.881,
+        "objects_min": 28,
+        "objects_max": 38
+      },
+      {
+        "view": 1,
+        "fps": 11.984,
+        "objects_min": 38,
+        "objects_max": 43
+      },
+      {
+        "view": 2,
+        "fps": 9.987,
+        "objects_min": 42,
+        "objects_max": 43
+      },
+      {
+        "view": 3,
+        "fps": 9.987,
+        "objects_min": 40,
+        "objects_max": 42
+      },
+      {
+        "view": 4,
+        "fps": 11.985,
+        "objects_min": 35,
+        "objects_max": 40
+      },
+      {
+        "view": 5,
+        "fps": 11.985,
+        "objects_min": 35,
+        "objects_max": 43
+      }
+    ]
+  },
+  "current-stress": {
+    "fixed_views": [
+      {
+        "view": 0,
+        "fps": 11.985,
+        "objects_min": 28,
+        "objects_max": 38
+      },
+      {
+        "view": 1,
+        "fps": 11.985,
+        "objects_min": 38,
+        "objects_max": 43
+      },
+      {
+        "view": 2,
+        "fps": 11.985,
+        "objects_min": 42,
+        "objects_max": 43
+      },
+      {
+        "view": 3,
+        "fps": 11.985,
+        "objects_min": 40,
+        "objects_max": 42
+      },
+      {
+        "view": 4,
+        "fps": 11.985,
+        "objects_min": 35,
+        "objects_max": 40
+      },
+      {
+        "view": 5,
+        "fps": 11.985,
+        "objects_min": 35,
+        "objects_max": 43
+      }
+    ]
+  },
+  "added-wrecks": {
+    "fixed_views": [
+      {
+        "view": 0,
+        "fps": 11.985,
+        "objects_min": 28,
+        "objects_max": 34
+      },
+      {
+        "view": 1,
+        "fps": 11.985,
+        "objects_min": 34,
+        "objects_max": 39
+      },
+      {
+        "view": 2,
+        "fps": 11.985,
+        "objects_min": 38,
+        "objects_max": 39
+      },
+      {
+        "view": 3,
+        "fps": 11.985,
+        "objects_min": 36,
+        "objects_max": 38
+      },
+      {
+        "view": 4,
+        "fps": 11.985,
+        "objects_min": 31,
+        "objects_max": 36
+      },
+      {
+        "view": 5,
+        "fps": 11.984,
+        "objects_min": 34,
+        "objects_max": 39
+      }
+    ]
+  },
+  "current-wrecks": {
+    "fixed_views": [
+      {
+        "view": 0,
+        "fps": 11.985,
+        "objects_min": 28,
+        "objects_max": 34
+      },
+      {
+        "view": 1,
+        "fps": 11.985,
+        "objects_min": 34,
+        "objects_max": 39
+      },
+      {
+        "view": 2,
+        "fps": 11.985,
+        "objects_min": 38,
+        "objects_max": 39
+      },
+      {
+        "view": 3,
+        "fps": 11.984,
+        "objects_min": 36,
+        "objects_max": 38
+      },
+      {
+        "view": 4,
+        "fps": 11.985,
+        "objects_min": 31,
+        "objects_max": 36
+      },
+      {
+        "view": 5,
+        "fps": 14.981,
+        "objects_min": 31,
+        "objects_max": 39
+      }
+    ]
+  },
+  "baseline_world_pixel_differences": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "added_to_final_pixel_differences": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "stress_wreck_pixel_differences": {
+    "stress": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "wrecks": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "rom_sha256": "48cdd7f8c236da36005922bc8000981fa6e9e6a4e6a04919a61318df10fa5443",
+  "note": "Fixed views are diagnostic states. HUD/radar intentionally changed from baseline; world pixels exclude them. Added comparator uses identical new gameplay with previous depth-sort loop; final uses the same signed compare/exchange order in a compact R800/Z80 routine. Key schedule is equal but gameplay may diverge. Geo3D geometry is not cycle-accurate; emulator rates do not predict hardware. Response sampled at release/frame loop, not exact visible latency."
+}

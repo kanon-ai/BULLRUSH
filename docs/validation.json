@@ -1,0 +1,25 @@
+{
+  "rom_sha256": "48cdd7f8c236da36005922bc8000981fa6e9e6a4e6a04919a61318df10fa5443",
+  "key_only": {
+    "all_four_destroyed": true,
+    "independent_damage": true,
+    "each_enemy_hit_particles": true,
+    "individual_wreck_coordinates_persist": true,
+    "continues_beyond_150_seconds": true,
+    "last_time": 180.00552709911454,
+    "player_damage_defeat_retry": true,
+    "pause_C_T_M": true,
+    "building_boundary_collision": true
+  },
+  "diagnostic_only": {
+    "position_writes": true,
+    "single_enemy_one_swing": true,
+    "four_enemies_one_hit_each_per_swing": true,
+    "held_attack_destroys_all": true,
+    "wrecks_multiple_angles": true
+  },
+  "physical_hardware_tested": false,
+  "bluemsx_tested": false,
+  "mapper_banks": 256,
+  "rom_bytes": 4194304
+}
